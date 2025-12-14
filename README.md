@@ -1,5 +1,9 @@
 # Final-Project-Jarkom-Kelompok-3
 
+## Topologi
+
+<img width="806" height="337" alt="Topologi_FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/08de104c-2c49-4319-8774-a7e50053b644" />
+
 ## Tabel Subnet Infrastruktur Jaringan
 
 | Nama Subnet | Rute | Jumlah Host | Jumlah Host + Gateway | Netmask |
@@ -32,14 +36,26 @@
 | A26 | Router 0 › Lantai 3                                     | 2   | 2   | /30 |
 | A27 | Router 0 › Kantor Cabang                                | 2   | 2   | /30 |
 | A28 | Kantor Cabang › Switch6 › Regional Office               | 40  | 41  | /26 |
+| **Total** | — | **1178** | **1199** | **/21** |
 
-**Total:**  
-Jumlah host: **1178**  
-Jumlah host + gateway: **1199**  
-Netmask keseluruhan: **/21**
+## Langkah Perhitungan + Cadangan
 
+| Langkah | Keterangan                                                                 |
+|---------|------------------------------------------------------------------------------|
+| 1       | Total kebutuhan host: **1199**                                              |
+| 2       | Cadangan 20%: 1199 × 0.2 = 239.8 ≈ **240**                                  |
+| 3       | Total dengan cadangan: 1199 + 240 = **1439**                                |
+| 4       | Prefix length untuk total host (setelah ditambah cadangan 20%): **/21**    |
 
-## Tabel Subnetting
+### Pembagian Subnet Topologi
+
+<img width="815" height="347" alt="Topologi FP Jarkom Kel 2 (Pembagian Subnet)" src="https://github.com/user-attachments/assets/a4740844-dcc0-4b1d-929c-fd2fab32c564" />
+
+## VLSM Tree
+
+<img width="768" height="573" alt="VLSM TREE FP Jarkom" src="https://github.com/user-attachments/assets/7596de8a-4515-4d95-9838-5631a220e332" />
+
+## Tabel Subnetting VLSM
 
 | Subnet | Prefix | Usable Hosts | Netmask           | Network ID     | Broadcast       | Usable Range                          |
 |--------|--------|--------------|-------------------|----------------|------------------|----------------------------------------|
@@ -51,9 +67,45 @@ Netmask keseluruhan: **/21**
 | A7     | /29    | 6            | 255.255.255.248   | 192.168.3.224  | 192.168.3.231    | 192.168.3.225 – 192.168.3.230          |
 | A1     | /30    | 2            | 255.255.255.252   | 192.168.3.232  | 192.168.3.235    | 192.168.3.233 – 192.168.3.234          |
 
-## Tabel Subnetting A8–A26
+### Penggabungan Subnet CIDR
 
+<img width="1629" height="693" alt="Topologi CIDR FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/7d05971e-a2e8-4892-b55c-6d357bff99ba" />
 
+## Tabel Gabungan Subnet CIDR
+
+### Penggabungan 1
+
+| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
+|--------|------------------|-----------|------------------|-----------|----------------|
+| B1     | A9               | /28       | A10              | /27       | /26            |
+| B2     | A12              | /27       | A13              | /27       | /26            |
+| B3     | A14              | /26       | A15              | /27       | /25            |
+| B4     | A16              | /27       | A17              | /27       | /26            |
+| B5     | A19              | /28       | A20              | /28       | /27            |
+
+### Penggabungan 2
+
+| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
+|--------|------------------|-----------|------------------|-----------|----------------|
+| C1     | B1               | /26       | A8               | /26       | /25            |
+| C2     | B2               | /26       | A11              | /26       | /25            |
+| C3     | B4               | /26       | A18              | /26       | /24            |
+| C4     | B5               | /27       | A21              | /27       | /26            |
+
+### Penggabungan 3
+
+| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
+|--------|------------------|-----------|------------------|-----------|----------------|
+| D1     | C1               | /25       | C2               | /25       | /24            |
+| D2     | C3               | /24       | B3               | /25       | /24            |
+
+### Penggabungan 4
+
+| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
+|--------|------------------|-----------|------------------|-----------|----------------|
+| E1     | D1               | /24       | D2               | /24       | /23            |
+
+## Tabel Subnetting CIDR
 
 
 | Subnet | CIDR  | Network ID     | Netmask         | Broadcast       | Range IP                          |
@@ -78,42 +130,13 @@ Netmask keseluruhan: **/21**
 | A25    | /30   | 192.168.6.64   | 255.255.255.252  | 192.168.6.67     | 192.168.6.65 – 192.168.6.66       |
 | A26    | /30   | 192.168.6.68   | 255.255.255.252  | 192.168.6.71     | 192.168.6.69 – 192.168.6.70       |
 
-## Tabel Gabungan Subnet
 
-| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
-|--------|------------------|-----------|------------------|-----------|----------------|
-| B1     | A9               | /28       | A10              | /27       | /26            |
-| B2     | A12              | /27       | A13              | /27       | /26            |
-| B3     | A14              | /26       | A15              | /27       | /25            |
-| B4     | A16              | /27       | A17              | /27       | /26            |
-| B5     | A19              | /28       | A20              | /28       | /27            |
 
-## Tabel Gabungan Subnet C1–C4
 
-| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
-|--------|------------------|-----------|------------------|-----------|----------------|
-| C1     | B1               | /26       | A8               | /26       | /25            |
-| C2     | B2               | /26       | A11              | /26       | /25            |
-| C3     | B4               | /26       | A18              | /26       | /24            |
-| C4     | B5               | /27       | A21              | /27       | /26            |
 
-## Tabel Gabungan Subnet D
 
-| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
-|--------|------------------|-----------|------------------|-----------|----------------|
-| D1     | C1               | /25       | C2               | /25       | /24            |
-| D2     | C3               | /24       | B3               | /25       | /24            |
 
-## Tabel Gabungan Subnet E
 
-| Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
-|--------|------------------|-----------|------------------|-----------|----------------|
-| E1     | D1               | /24       | D2               | /24       | /23            |
-<img width="768" height="573" alt="VLSM TREE FP Jarkom" src="https://github.com/user-attachments/assets/7596de8a-4515-4d95-9838-5631a220e332" />
 
-<img width="806" height="337" alt="Topologi_FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/08de104c-2c49-4319-8774-a7e50053b644" />
 
-<img width="815" height="347" alt="Topologi FP Jarkom Kel 2 (Pembagian Subnet)" src="https://github.com/user-attachments/assets/a4740844-dcc0-4b1d-929c-fd2fab32c564" />
-
-<img width="1629" height="693" alt="Topologi CIDR FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/7d05971e-a2e8-4892-b55c-6d357bff99ba" />
 
