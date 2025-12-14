@@ -1,5 +1,15 @@
 # Final-Project-Jarkom-Kelompok-3
 
+## Anggota Kelompok
+
+| No. | Nama Lengkap                          | NRP         |
+|-----|----------------------------------------|-------------|
+| 1   | Diva Aulia Rosa                        | 5027241003  |
+| 2   | Clarissa Aydin Rahmazea                | 5027241014  |
+| 3   | Muhammad Rakha Hananditya Rauf         | 5027241015  |
+| 4   | Muhammad Rafi' Adly                    | 5027241082  |
+
+
 ## 1. Topologi Jaringan
 
 <img width="806" height="337" alt="Topologi_FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/08de104c-2c49-4319-8774-a7e50053b644" />
