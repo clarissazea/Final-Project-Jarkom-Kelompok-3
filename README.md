@@ -7,7 +7,9 @@
 | 1   | Diva Aulia Rosa                        | 5027241003  |
 | 2   | Clarissa Aydin Rahmazea                | 5027241014  |
 | 3   | Muhammad Rakha Hananditya Rauf         | 5027241015  |
-| 4   | Muhammad Rafi' Adly                    | 5027241082  |
+| 4   | Danishwara Fausta Novanto              | 5027241050  |
+| 5   | Raihan Fahri Ghazali                   | 5027241061  |
+| 6   | Muhammad Rafi' Adly                    | 5027241082  |
 
 
 ## 1. Topologi Jaringan
