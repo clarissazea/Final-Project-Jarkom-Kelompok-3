@@ -14,6 +14,9 @@
 
 ## Tabel Subnetting A8–A26
 
+
+
+
 | Subnet | CIDR  | Network ID     | Netmask         | Broadcast       | Range IP                          |
 |--------|-------|----------------|------------------|------------------|-----------------------------------|
 | A8     | /26   | 192.168.4.192  | 255.255.255.192  | 192.168.4.255    | 192.168.4.193 – 192.168.4.254     |
@@ -72,4 +75,6 @@
 <img width="806" height="337" alt="Topologi_FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/08de104c-2c49-4319-8774-a7e50053b644" />
 
 <img width="815" height="347" alt="Topologi FP Jarkom Kel 2 (Pembagian Subnet)" src="https://github.com/user-attachments/assets/a4740844-dcc0-4b1d-929c-fd2fab32c564" />
+
+<img width="1629" height="693" alt="Topologi CIDR FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/7d05971e-a2e8-4892-b55c-6d357bff99ba" />
 
