@@ -7,7 +7,7 @@
 | 1   | Diva Aulia Rosa                        | 5027241003  |
 | 2   | Clarissa Aydin Rahmazea                | 5027241014  |
 | 3   | Muhammad Rakha Hananditya Rauf         | 5027241015  |
-| 4   | Danishwara Fausta Novanto              | 5027241050  |
+| 4   | Daniswara Fausta Novanto              | 5027241050  |
 | 5   | Raihan Fahri Ghazali                   | 5027241061  |
 | 6   | Muhammad Rafi' Adly                    | 5027241082  |
 
@@ -467,8 +467,83 @@ Perintah ini menyimpan konfigurasi tetap aktif setelah router di restart
 Dengan konfigurasi NAT Overload ini, seluruh host dari Gedung Utama, Gedung ARA Tech, dan Kantor Cabang dapat mengakses internet melalui Router 0. Semua koneksi keluar diterjemahkan menggunakan satu alamat IP publik dengan bantuan mekanisme port address translation (PAT).
 
 ## 7. GRE Tunnel
-GRE Tunnel dibuat antara router Gedung Utama dan router Kantor Cabang untuk komunikasi aman.
 
 
+**Tujuan:**
+Konfigurasi GRE (Generic Routing Encapsulation) Tunnel antara router **Gedung Utama (Router 1)** dan router **Kantor Cabang** untuk membangun koneksi virtual yang aman, memungkinkan komunikasi antara perangkat di kedua jaringan seolah-olah terhubung langsung.
 
+### Parameter Koneksi Point-to-Point
 
+Untuk koneksi Tunnel, kita akan menggunakan subnet point-to-point baru yang belum terpakai, misalnya:
+
+| Subnet | Deskripsi | CIDR | Network ID | IP Address (Router 1) | IP Address (Router Kantor Cabang) |
+|---|---|---|---|---|---|
+| A29 | GRE Tunnel P2P | /30 | 192.168.7.0 | 192.168.7.1 | 192.168.7.2 |
+
+### 1\. Konfigurasi Router 1 (Gedung Utama)
+
+Router 1 terhubung ke Router 0 melalui interface **FastEthernet0/0** dengan IP **192.168.3.234**. Router 0 terhubung ke Kantor Cabang melalui IP **192.168.6.69**. Kita akan menggunakan alamat IP publik (Router 0) sebagai `tunnel destination` untuk Router 1, dan alamat IP publik Router Kantor Cabang sebagai `tunnel destination` untuk Router Kantor Cabang.
+
+```bash
+enable
+configure terminal
+
+interface Tunnel0
+ ip address 192.168.7.1 255.255.255.252
+ tunnel source FastEthernet0/0
+ tunnel destination 192.168.6.70
+ tunnel mode gre ip
+ no shutdown
+exit
+
+ip route 192.168.7.0 255.255.255.192 192.168.7.2
+exit
+copy running-config startup-config
+```
+
+### 2\. Konfigurasi Router Kantor Cabang
+
+Router Kantor Cabang terhubung ke Router 0 melalui interface **FastEthernet0/0** dengan IP **192.168.6.70**. Router 0 terhubung ke Router 1 melalui IP **192.168.6.69**.
+
+```bash
+enable
+configure terminal
+
+ interface Tunnel0
+ ip address 192.168.7.2 255.255.255.252
+ tunnel source FastEthernet0/0
+ tunnel destination 192.168.6.69
+ tunnel mode gre ip
+ no shutdown
+exit
+
+ip route 192.168.0.0 255.255.252.0 192.168.7.1
+exit
+copy running-config startup-config
+```
+
+> **Catatan:**
+>
+>   * Blok subnet Gedung Utama adalah **192.168.0.0/22** (Range 192.168.0.0 hingga 192.168.3.255).
+>   * Kita berasumsi interface yang terhubung ke Kantor Cabang di Router 0 memiliki IP **192.168.6.69** (A26) dan interface Router Kantor Cabang memiliki IP **192.168.6.70** (A26). *Asumsi ini akan disesuaikan jika IP A27 dan A26 Anda terbalik.*
+
+### 3\. Verifikasi Konektivitas
+
+Setelah konfigurasi GRE Tunnel selesai, Anda dapat memverifikasi konektivitas dengan:
+
+1.  **Ping antar Router Tunnel IP:**
+
+    ```bash
+    # Di Router 1
+    ping 192.168.7.2
+
+    # Di Router Kantor Cabang
+    ping 192.168.7.1
+    ```
+
+2.  **Ping antar Perangkat di Jaringan Masing-Masing:**
+    Lakukan ping dari host di Gedung Utama ke host di Kantor Cabang (Regional Office) dan sebaliknya.
+
+    ```bash
+    ping 192.168.7.5
+    ```
