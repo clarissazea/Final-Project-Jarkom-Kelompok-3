@@ -67,5 +67,9 @@
 | Subnet | Gabungan dari 1 | Netmask 1 | Gabungan dari 2 | Netmask 2 | Netmask Akhir |
 |--------|------------------|-----------|------------------|-----------|----------------|
 | E1     | D1               | /24       | D2               | /24       | /23            |
+<img width="768" height="573" alt="VLSM TREE FP Jarkom" src="https://github.com/user-attachments/assets/7596de8a-4515-4d95-9838-5631a220e332" />
 
+<img width="806" height="337" alt="Topologi_FP Jarkom Kel 2" src="https://github.com/user-attachments/assets/08de104c-2c49-4319-8774-a7e50053b644" />
+
+<img width="815" height="347" alt="Topologi FP Jarkom Kel 2 (Pembagian Subnet)" src="https://github.com/user-attachments/assets/a4740844-dcc0-4b1d-929c-fd2fab32c564" />
 
