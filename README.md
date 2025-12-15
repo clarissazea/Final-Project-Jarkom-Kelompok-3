@@ -9,7 +9,6 @@
 | 3   | Muhammad Rakha Hananditya Rauf         | 5027241015  |
 | 4   | Daniswara Fausta Novanto              | 5027241050  |
 | 5   | Raihan Fahri Ghazali                   | 5027241061  |
-| 6   | Muhammad Rafi' Adly                    | 5027241082  |
 
 
 ## 1. Topologi Jaringan
@@ -395,6 +394,7 @@ Koneksi antar Gedung Utama dan Gedung ARA Tech (ada failed karena biasanya ping 
 <img width="1917" height="1043" alt="image" src="https://github.com/user-attachments/assets/e9e37a95-e908-4d97-9f2b-c097a0ae7ed9" />
 
 DHCP
+
 <img width="479" height="191" alt="dhcp neww" src="https://github.com/user-attachments/assets/5c5da36f-f4af-47fa-b9d0-ddb98055f4f2" />
 
  Koneksi Gedung ARA Tech dan Kantor Cabang
